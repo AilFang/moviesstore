@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'movies',
     'accounts',
     'cart',
-    'movie_requests'
+    'movie_requests',
+    'petitions',
 ]
 
 MIDDLEWARE = [

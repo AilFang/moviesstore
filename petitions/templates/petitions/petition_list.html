@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Petitions - Movie Store{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3">Petitions</h1>
+    <a href="{% url 'petitions:create' %}" class="btn btn-primary">Create Petition</a>
+  </div>
+
+  {% if petitions %}
+    <div class="list-group">
+      {% for petition in petitions %}
+        <a href="{% url 'petitions:detail' petition.pk %}" 
+           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="mb-1">{{ petition.title }}</h5>
+            <small class="text-muted">Created by {{ petition.created_by }} on {{ petition.created_at|date:"M d, Y" }}</small>
+          </div>
+          <div>
+            <span class="badge bg-success">Yes: {{ petition.yes_count }}</span>
+            <span class="badge bg-danger">No: {{ petition.no_count }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">No petitions yet. Be the first to <a href="{% url 'petitions:create' %}">create one</a>.</div>
+  {% endif %}
+</div>
+{% endblock %}
